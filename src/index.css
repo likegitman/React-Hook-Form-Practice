@@ -26,6 +26,10 @@ form {
   align-items: center;
 }
 
+.form-control {
+  width: 100%;
+}
+
 label {
   font-weight: 600;
   display: flex;
