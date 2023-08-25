@@ -1,5 +1,5 @@
 import { DevTool } from "@hookform/devtools";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 
 interface FormValue {
   username: string;
@@ -9,6 +9,8 @@ interface FormValue {
     facebook: string;
     instagram: string;
   };
+  phoneNumbers: string[];
+  phNumbers: [{ number: "" }];
 }
 
 export default function Form() {
@@ -21,10 +23,15 @@ export default function Form() {
         facebook: "",
         instagram: "",
       },
+      phoneNumbers: ["", ""],
     },
   });
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
+  const { fields, append, remove } = useFieldArray({
+    name: "phNumbers",
+    control,
+  });
 
   const onSubmit = (data: FormValue) => {
     console.log(data);
@@ -103,6 +110,58 @@ export default function Form() {
             })}
           />
           <p>{errors.social?.instagram?.message}</p>
+        </div>
+        <div className="form-control">
+          <label htmlFor="primary-phone">Primary Phone Number</label>
+          <input
+            type="text"
+            id="primary-phone"
+            {...register("phoneNumbers.0", {
+              required: {
+                value: true,
+                message: "Channel is Required",
+              },
+            })}
+          />
+          <p>{errors.channel?.message}</p>
+        </div>
+        <div className="form-control">
+          <label htmlFor="secondary-phone">Secondary Phone Number</label>
+          <input
+            type="text"
+            id="secondary-phone"
+            {...register("phoneNumbers.1", {
+              required: {
+                value: true,
+                message: "Channel is Required",
+              },
+            })}
+          />
+          <p>{errors.channel?.message}</p>
+        </div>
+        <div>
+          <label>List of Phone Numbers</label>
+          <div>
+            {fields.map((field, idx) => {
+              return (
+                <div className="form-control" key={field.id}>
+                  <input
+                    type="text"
+                    {...register(`phNumbers.${0}.number` as const)}
+                  />
+                  {idx > 0 && (
+                    <button type="button" onClick={() => remove(idx)}>
+                      Remove
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <button type="button" onClick={() => append({ number: "" })}>
+            Add Phone Number
+          </button>
+          <p>{errors.channel?.message}</p>
         </div>
         <button>Submit</button>
       </form>
