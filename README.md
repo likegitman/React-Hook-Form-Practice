@@ -1,46 +1,20 @@
-# Getting Started with Create React App
+# React-Hook-Form
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> React에서 form의 validation을 도와주는 라이브러리이다. 장점은 가볍고, 다른 `dependency`가 없으며,  
+> `ref`를 기반으로 하여 다른 UI 라이브러리와 호환이 잘 된다.
 
-## Available Scripts
+## register, handleSubmit
 
-In the project directory, you can run:
+```js
+const { register, handleSubmit } = useForm();
 
-### `yarn start`
+const onSubmit = (data) => console.log(data);
+const onErrors = (errors) => console.log(errors)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<form onSubmit={handleSubmit(onSubmit, onErrors)}>// ...</form>;
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+> register는 해당 컴포넌트의 값을 트래킹하고 `validation`을 하기위해 `react hook form` 라이브러리에 등록한다는 뜻이다.  
+> handleSubmit method는 form 제출을 handling하는 method로 form 컴포넌트의 onSubmit prop에 handleSubmit을 넘겨주면 된다.  
+> handleSubmit은 두 가지 argument를 받는데, 첫번째는 form validation이 success일 때 호출하는 callback이고 두번째는 fail일 때  
+> 에러와 함께 호출하는 callback이다.
