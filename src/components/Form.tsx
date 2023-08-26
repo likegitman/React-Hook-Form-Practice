@@ -147,7 +147,8 @@ export default function Form() {
                 <div className="form-control" key={field.id}>
                   <input
                     type="text"
-                    {...register(`phNumbers.${0}.number` as const)}
+                    {...register(`phNumbers.${idx}.number`)}
+                    defaultValue={field.number}
                   />
                   {idx > 0 && (
                     <button type="button" onClick={() => remove(idx)}>

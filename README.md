@@ -18,3 +18,9 @@ const onErrors = (errors) => console.log(errors)
 > handleSubmit method는 form 제출을 handling하는 method로 form 컴포넌트의 onSubmit prop에 handleSubmit을 넘겨주면 된다.  
 > handleSubmit은 두 가지 argument를 받는데, 첫번째는 form validation이 success일 때 호출하는 callback이고 두번째는 fail일 때  
 > 에러와 함께 호출하는 callback이다.
+
+## useFieldArray
+
+> `form`의 `field array`는 동적으로 생성된다. 사용자가 필요에 따라서 field를 추가허거나 제거할 수 있는 기능을 제공한다.  
+> 대신 form field 배열의 이름과 register에 등록하는 이름이 같아야 한다.  
+> 추가할 때는 append 함수를 제거할 때는 remove 함수를 사용해야한다.
